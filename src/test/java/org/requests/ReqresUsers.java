@@ -114,4 +114,24 @@ public class ReqresUsers {
 			.body("data[2].color", equalTo("#BF1932"))
 			.log().all();
 	}
+	
+	@Test
+	public void getUsersUsingPathAndQueryParameters() {
+		
+		given()
+			.header("x-api-key", "reqres-free-v1")
+			.pathParam("customPath1", "users")
+			.queryParam("page", 2)
+			.queryParam("id", 6)
+			
+		.when()
+			//This will pass the url "https://reqres.in/api/users?page=2&id=5"
+			//Query parameters need not be mentioned in curly braces, since it will be automatically be passed into the request from the queryParam method
+			.get(baseURL+"api/{customPath1}") 
+			
+		.then()
+			.statusCode(200)
+			.log().all()
+			.body("data.id", equalTo(6));
+	}
 }

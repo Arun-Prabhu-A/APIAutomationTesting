@@ -31,9 +31,10 @@ public class StationaryUsers {
 	public void createUser() {
 		
 		/*
-		 * HashMap data = new HashMap(); data.put("name", "Aravind"); data.put("gender",
-		 * "Male"); data.put("email", "aravind@gmail.com"); data.put("password",
-		 * "1809Aravind");
+		 * HashMap data = new HashMap(); data.put("name", "Aravind"); 
+		 * data.put("gender", "Male"); 
+		 * data.put("email", "aravind@gmail.com"); 
+		 * data.put("password", "1809Aravind");
 		 */
 		
 		Stationary_POJO data = new Stationary_POJO();
