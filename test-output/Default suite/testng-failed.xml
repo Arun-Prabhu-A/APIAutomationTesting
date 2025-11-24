@@ -5,7 +5,7 @@
     <classes>
       <class name="org.requests.ReqresUsers">
         <methods>
-          <include name="getUsersUsingPathAndQueryParameters"/>
+          <include name="getHeaderInfo"/>
         </methods>
       </class> <!-- org.requests.ReqresUsers -->
     </classes>

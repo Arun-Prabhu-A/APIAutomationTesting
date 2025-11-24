@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -15,6 +16,8 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.testng.annotations.Test;
 
+import io.restassured.http.Header;
+import io.restassured.http.Headers;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 
@@ -25,15 +28,23 @@ public class ReqresUsers {
 	
 	@Test(priority=1)
 	public void getUsers() {
+		
+		//Pre-requisites required before sending the request
 		given()
 			.header("x-api-key", "reqres-free-v1")
 			
+		//Send the request
 		.when()
 			.get(baseURL+"api/users?page=2")
-			
+		
+		//Validation of the response
 		.then()
-			.statusCode(200)
-			.log().all();
+			.statusCode(200)			// To verify the expected status code
+			//.log().status()				//To print only the status code
+			//.log().body()					//To print only the response body
+			//.log().headers()				// To print only the headers
+			//.log().cookies()				// To print only the cookies
+			.log().all();						// To print all the above information
 	}
 	
 	@Test(priority=2)
@@ -155,7 +166,37 @@ public class ReqresUsers {
 			String value = response.getCookie(key);
 			System.out.println(key+": "+value);
 		}
-			
+
+	}
+	
+	@Test
+	public void validateHeaderInfo() {
+				given()
+				
+				.when()
+					.get("https://www.google.com/")
+					
+				.then()
+					.header("Content-Encoding", equalTo("gzip"));
+
+	}
+	
+	@Test
+	public void getHeaderInfo() {
+		
+		Response response = given()
+		
+		.when()
+			.get("https://www.google.com/");
+		
+		System.out.println(response.getHeader("Content-Encoding"));
+		
+		Headers headers = response.getHeaders();
+		
+		for (Header headerName : headers) {
+			String value = headerName.getValue();
+			System.out.println(headerName.getName()+": "+value);
+		}
 
 	}
 }
