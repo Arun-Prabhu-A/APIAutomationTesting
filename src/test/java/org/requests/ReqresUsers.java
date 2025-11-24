@@ -65,8 +65,8 @@ public class ReqresUsers {
 	}
 	
 	@Test(priority=3, dependsOnMethods = {"createUser"})
-	private void updateUser() {
-		Map data = new HashMap();
+	public void updateUser() {
+		Map<String, String> data = new HashMap<String, String>();
 		data.put("name", "Arun Prabhu");
 		
 		given()

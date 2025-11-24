@@ -62,7 +62,7 @@ public class StationaryUsers {
 	}
 	
 	@Test(priority=3, dependsOnMethods = {"createUser"})
-	private void updateUser() {
+	public void updateUser() {
 
 	    Map<String, Object> data = new HashMap<>();
 	    data.put("name", "Aravind Alan");
