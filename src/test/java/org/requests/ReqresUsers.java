@@ -7,13 +7,16 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.testng.annotations.Test;
 
 import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 
 public class ReqresUsers {
 	
@@ -133,5 +136,26 @@ public class ReqresUsers {
 			.statusCode(200)
 			.log().all()
 			.body("data.id", equalTo(6));
+	}
+	
+	@Test
+	public void getCookiesInfo() {
+		
+		Response response = given()
+		
+		.when()
+			.get("https://www.google.com/");
+		
+		System.out.println(response.getCookie("AEC"));
+		
+		Map<String, String> cookies = response.getCookies();
+		Set<String> keySet = cookies.keySet();
+		
+		for (String key : keySet) {
+			String value = response.getCookie(key);
+			System.out.println(key+": "+value);
+		}
+			
+
 	}
 }
