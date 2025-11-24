@@ -126,7 +126,7 @@ public class ReqresUsers {
 			
 		.when()
 			//This will pass the url "https://reqres.in/api/users?page=2&id=5"
-			//Query1111111111111 parameters need not be mentioned in curly braces, since it will be automatically be passed into the request from the queryParam method
+			//Query parameters need not be mentioned in curly braces, since it will be automatically be passed into the request from the queryParam method
 			.get(baseURL+"api/{customPath1}") 
 			
 		.then()
