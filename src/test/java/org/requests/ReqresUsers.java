@@ -123,7 +123,7 @@ public class ReqresUsers {
 		.then()
 			.statusCode(200)
 			.body("total", equalTo(12))
-			.body("data[0].name", equalTo("cerulean"))
+			.body("data[0].name", equalTo("cerulean")) //To verify the data inside a json array (Nested data)
 			.body("data[1].id", equalTo(2))
 			.body("data[2].color", equalTo("#BF1932"))
 			.log().all();
@@ -197,6 +197,16 @@ public class ReqresUsers {
 			String value = headerName.getValue();
 			System.out.println(headerName.getName()+": "+value);
 		}
-
+	}
+	
+	@Test
+	public void validateUsingResponseObject() {
+		Response response = given()
+			.header("x-api-key", "reqres-free-v1")
+		.when()
+			.get(baseURL+"api/users?page=2");
+		
+		Object emailObject = response.jsonPath().get("data[0].email");
+		System.out.println(emailObject.toString());
 	}
 }
