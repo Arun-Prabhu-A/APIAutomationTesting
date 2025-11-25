@@ -12,9 +12,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import com.google.gson.JsonObject;
 
 import io.restassured.http.Header;
 import io.restassured.http.Headers;
@@ -166,7 +170,6 @@ public class ReqresUsers {
 			String value = response.getCookie(key);
 			System.out.println(key+": "+value);
 		}
-
 	}
 	
 	@Test
@@ -208,5 +211,40 @@ public class ReqresUsers {
 		
 		Object emailObject = response.jsonPath().get("data[0].email");
 		System.out.println(emailObject.toString());
+		System.out.println(response.toString());
 	}
+	
+	@Test
+	public void traversingThroughJsonArray() {
+
+	    Response response = given()
+	            .header("x-api-key", "reqres-free-v1")
+	        .when()
+	            .get(baseURL + "api/users?page=2");
+
+	    // Convert response to JSON string
+	    String jsonString = response.getBody().asString();
+
+	    // Parse JSON using org.json
+	    JSONObject jsonObject = new JSONObject(jsonString);
+
+	    // Extract array
+	    JSONArray dataJsonArray = jsonObject.getJSONArray("data");
+
+	    // Traverse array
+	    for (int i = 0; i < dataJsonArray.length(); i++) {
+
+	        JSONObject item = dataJsonArray.getJSONObject(i);
+	        int id = item.getInt("id");
+
+	        if (id == 7) {
+	            String email = item.getString("email");
+	            System.out.println(email);
+	            Assert.assertEquals(email, "michael.lawson@reqres.in");
+	        }
+	    }
+	    // To print the response
+	    response.prettyPrint();
+	}
+
 }
