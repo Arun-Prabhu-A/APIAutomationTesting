@@ -5,7 +5,7 @@
     <classes>
       <class name="org.requests.ReqresUsers">
         <methods>
-          <include name="traversingThroughJsonArray"/>
+          <include name="exercise"/>
         </methods>
       </class> <!-- org.requests.ReqresUsers -->
     </classes>
