@@ -217,13 +217,14 @@ public class ReqresUsers {
 	@Test
 	public void traversingThroughJsonArray() {
 
-	    Response response = given()
+	    Response response = 
+	    	given()
 	            .header("x-api-key", "reqres-free-v1")
 	        .when()
 	            .get(baseURL + "api/users?page=2");
 
 	    // Convert response to JSON string
-	    String jsonString = response.getBody().asString();
+	    String jsonString = response.asString();
 
 	    // Parse JSON using org.json
 	    JSONObject jsonObject = new JSONObject(jsonString);
